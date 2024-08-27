@@ -14,6 +14,10 @@ class window:
         pygame.display.set_caption(self.name)
         for obj in self.objlist:
             obj.surf = screen
+            if obj.name == "Player":
+                obj.setVel(2, 9)
+            if obj.name == "Balls":
+                obj.setVel(-2,9)
         while self.running:
             self.clock.tick(10)
             pygame.display.flip()

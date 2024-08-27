@@ -20,9 +20,17 @@ class gameObject:
         self.name = name
         self.transform = transform
         self.surf = None
+        self.velx = 0
+        self.vely = 0
     def draw(self):
         x = int(self.transform.getPos()[0]+Surface.get_width(self.surf)/2)
         y = int(self.transform.getPos()[1]+Surface.get_height(self.surf)/2)
-        self.surf.set_at((x, y), (255, 255, 255))
+        self.surf.set_at((x, y), (255, 0, 0))
     def update(self):
-        self.transform.movePos(1,0)
+        if((self.vely+self.transform.getPos()[1] < Surface.get_height(self.surf)) and (self.vely+self.transform.getPos()[1] > 0)):
+            self.transform.movePos(0,self.vely)
+        if((self.velx+self.transform.getPos()[0] < Surface.get_width(self.surf)) and (self.velx+self.transform.getPos()[0] > 0)):
+            self.transform.movePos(self.velx,0)
+    def setVel(self,x:int,y:int):
+        self.velx = x
+        self.vely = y
